@@ -1,0 +1,13 @@
+.mainClass {
+    @apply fixed top-0 bottom-0 w-96 right-0 bg-white shadow-md shadow-zinc-400 z-30
+}
+
+.themeToggleBtn {
+    @apply w-20 h-11 border-2 border-black rounded-lg transition-colors duration-200 ease-in-out
+}
+.navbarFixedBtn {
+    @apply absolute -top-1.5 -left-2 w-5 h-5 rounded-full bg-neutral-900 transition-all duration-300 ease-in-out
+}
+.colorTogglerBtn {
+    @apply w-6 h-6 flex items-center justify-center rounded-full scale-90 hover:scale-110 ring-1 ring-black transition-all ease-in-out duration-200
+}

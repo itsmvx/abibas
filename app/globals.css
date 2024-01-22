@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'tommy';
+  src: local('./../public/assets/fonts/made_tommy/MADE_TOMMY_Regular_PERSONAL_USE.otf');
+}
+
+.font-tommy {
+  font-family: tommy, sans-serif;
+  font-style: normal;
+}

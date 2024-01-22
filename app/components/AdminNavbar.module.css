@@ -1,0 +1,9 @@
+.navbarBaseClass {
+    @apply flex flex-row items-center justify-between gap-x-4 select-none rounded-md transition-all duration-300 ease-in-out
+}
+.navbarFixed {
+    @apply sticky top-0 h-20 bg-white shadow-sm shadow-zinc-500 z-30
+}
+.navbarStatic {
+    @apply static h-24 bg-transparent translate-y-0
+}

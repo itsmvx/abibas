@@ -1,0 +1,25 @@
+.sideNavWrapper {
+    @apply fixed top-0 lg:top-5 left-0 lg:left-5 bottom-0 lg:bottom-5 w-72 -translate-x-80 lg:translate-x-0 rounded-xl subpixel-antialiased transition-all duration-200 ease-in-out shadow-md ring-1 ring-zinc-300 select-none overflow-hidden
+}
+.sideNavMain {
+    @apply w-full h-full relative transition-colors duration-300 ease-in-out
+}
+.sideNavLinkWrapper {
+    @apply w-full space-y-4 tracking-wider font-sans
+}
+.sideNavLogo {
+    @apply w-11 transition-all duration-200 ease-in-out
+}
+.sideNavHeading {
+    @apply text-3xl font-bold font-sans brightness-90 transition-colors duration-100 ease-in-out
+}
+.sideNavLinkBtnMain {
+    @apply w-4/5 h-12 mx-auto font-medium flex items-center justify-start rounded-lg
+}
+.sideNavLinkBtnInactive {
+    @apply text-zinc-700 hover:text-black hover:bg-zinc-300 transition-all duration-100 ease-in-out
+}
+.sideNavLogoutBtn {
+    @apply w-10/12 h-12 mx-auto flex flex-row items-center text-base font-medium rounded-md select-none transition-colors duration-200 ease-in-out
+}
+

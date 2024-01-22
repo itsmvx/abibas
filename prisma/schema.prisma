@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Roles {
+  id         String    @id
+  name       String    @unique
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  users      User[]
+}
+
+model Account {
+  id                 String    @id @default(cuid())
+  userId             String
+  providerType       String
+  providerId         String
+  providerAccountId  String
+  refreshToken       String?
+  accessToken        String?
+  accessTokenExpires DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  user               User      @relation(fields: [userId], references: [id])
+
+  @@unique([providerId, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  fullname      String?
+  username      String    @unique
+  email         String    @unique
+  emailVerified DateTime?
+  password      String
+  role          String
+  images        String[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  roles         Roles     @relation(fields: [role], references: [id])
+}
+
+model VerificationRequest {
+  id         String   @id @default(cuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([identifier, token])
+}
+
+enum Genders {
+  UNISEX
+  MALE
+  FEMALE
+}
+
+model Audiences {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  images    String[]
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @updatedAt
+  products  Products[]
+}
+
+model Categories {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String
+  description String
+  images      String[]
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  products    Products[]
+}
+
+model Genres {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String
+  description String
+  images      String[]
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  products    Products[]
+}
+
+model Series {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String
+  description String
+  images      String[]
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  products    Products[]
+}
+
+model Products {
+  id          String      @id @default(cuid())
+  gender      Genders
+  audienceId  String
+  categoryId  String
+  genresId    String
+  seriesId    String
+  name        String      @unique
+  slug        String
+  description String
+  specs       String
+  images      String[]
+  price       Float
+  stock       Int
+  createdAt   DateTime?   @default(now())
+  updatedAt   DateTime?   @updatedAt
+  audiences   Audiences?  @relation(fields: [audienceId], references: [id])
+  categories  Categories? @relation(fields: [categoryId], references: [id])
+  series      Series?     @relation(fields: [seriesId], references: [id])
+  genres      Genres?     @relation(fields: [genresId], references: [id])
+  events      Events[]
+}
+
+model Events {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String
+  description String
+  images      String[]
+  status      Boolean    @default(false)
+  beginDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  products    Products[]
+}
