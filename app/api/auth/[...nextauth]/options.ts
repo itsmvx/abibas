@@ -75,6 +75,7 @@ export const options: NextAuthOptions = {
                     role: token.role
                 }
             };
+            return session;
         },
 
     }
