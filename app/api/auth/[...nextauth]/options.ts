@@ -64,17 +64,19 @@ export const options: NextAuthOptions = {
             return token;
         },
         async session({ session, token }) {
-            return {
-                ...session,
-                user: {
-                    ...session.user,
-                    fullname: token.fullname,
-                    username: token.username,
-                    email: token.email,
-                    images: token.images,
-                    role: token.role
-                }
-            };
+            if ( token.fullname ) {
+                 return {
+                    ...session,
+                    user: {
+                        ...session.user,
+                        fullname: token.fullname,
+                        username: token.username,
+                        email: token.email,
+                        images: token.images,
+                        role: token.role
+                    }
+                };
+            }
             return session;
         },
 
